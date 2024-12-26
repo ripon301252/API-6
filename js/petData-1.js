@@ -44,6 +44,6 @@ const displayLoadData = (petData) =>{
 
 loadPetData()
 
-document.getElementById('pet-details').addEventListener('click',function(){
-    document.getElementById('pet-data-container').classList.remove('hidden')
-})
+// document.getElementById('pet-details').addEventListener('click',function(){
+//     document.getElementById('pet-data-container').classList.remove('hidden')
+// })
