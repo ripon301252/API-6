@@ -19,6 +19,15 @@
             .catch((err) => console.log(err))
     }
 
+    const loadCategoryImage = (id) => {
+        alert(id)
+        // fetch the data
+        fetch(`https://openapi.programming-hero.com/api/peddy/pet/${id}`)
+            .then((res) => res.json())
+            .then((data) => console.log(data.petData.category))
+            .catch((err) => console.log(err))
+        
+    }
 
     // const cardDemo = {
     //     "petId": 1,
@@ -71,38 +80,46 @@
 
         categories.forEach((item) => {
             
-            // create buttons
-            
-            const button = document.createElement('button');
-            button.classList = 'btn';
-            button.innerText = item.category;
+        // create buttons
+              const buttonContainer = document.createElement('div');
+              buttonContainer.innerHTML =`
+              <button onclick="loadCategoryImage(${item.id})" class="btn lg:text-xl text-xs">
+                 <img src="${item.category_icon}" alt="Shoes" class="rounded-xl lg:w-10 w-7  object-cover " />  ${item.category}
+              </button>
+              `  
+
+            // const button = document.createElement('button');
+            // button.classList = 'btn';
+            // button.innerText = item.category;
            
-            const image = document.createElement('div');
-            image.classList = 'btn';
-            image.innerHTML = `
-                <img src="${item.category_icon}" alt="Shoes" class="rounded-xl w-10 object-cover" />
-            `
+
+            // const image = document.createElement('div');
+            // image.classList = 'btn';
+            // image.innerHTML = `
+            //     <img src="${item.category_icon}" alt="Shoes" class="rounded-xl w-10 object-cover" />
+            // `
             // add button to categoryContainer
-            
-            categoryContainer.append(image,button);
+        
+
+            // categoryContainer.append(image,button);
+            categoryContainer.append(buttonContainer);
         });
 
 
 
         // categories.forEach((item) => {
-            
-        //     // create buttons
+        
+        //              // create buttons
         //     const button = document.createElement('button');
         //     button.classList = 'btn';
         //     button.innerText = item.category;
           
-          
-
-        //     // add button to categoryContainer
+        //              // add button to categoryContainer
         //     categoryContainer.append(button)
-
         // });
     }
 
     loadCategories()
     loadImages()
+    
+
