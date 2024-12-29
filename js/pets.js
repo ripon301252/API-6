@@ -8,7 +8,6 @@
             .then((res) => res.json())
             .then((data) => displayCategories(data.categories))
             .catch((err) => console.log(err))
-  
     }
 
     const loadImages = () =>{
@@ -19,28 +18,19 @@
             .catch((err) => console.log(err))
     }
 
-    const loadCategoryImage = (id) => {
-        alert(id)
+    const loadCategoryImage = (category) => {
+        // alert(category)
         // fetch the data
-        fetch(`https://openapi.programming-hero.com/api/peddy/pet/${id}`)
+        fetch(`https://openapi.programming-hero.com/api/peddy/category/${category}`)
             .then((res) => res.json())
-            .then((data) => console.log(data.petData.category))
+            .then((data) =>{
+                console.log(data.data)
+                console.log(data)
+                console.log(category)
+            })
+            
             .catch((err) => console.log(err))
-        
     }
-
-    // const cardDemo = {
-    //     "petId": 1,
-    //     "breed": "Golden Retriever",
-    //     "category": "Dog",
-    //     "date_of_birth": "2023-01-15",
-    //     "price": 1200,
-    //     "image": "https://i.ibb.co.com/p0w744T/pet-1.jpg",
-    //     "gender": "Male",
-    //     "pet_details": "This friendly male Golden Retriever is energetic and loyal, making him a perfect companion for families. Born on January 15, 2023, he enjoys playing outdoors and is especially great with children. Fully vaccinated, he's ready to join your family and bring endless joy. Priced at $1200, he offers love, loyalty, and a lively spirit for those seeking a playful yet gentle dog.",
-    //     "vaccinated_status": "Fully",
-    //     "pet_name": "Sunny"
-    // }
 
     const displayImages = (pets) =>{
        const imageContainer = document.getElementById('pets-image') 
@@ -56,13 +46,18 @@
             </figure>
             <div class=" items-center  px-5">
                 <h2 class="font-bold text-3xl mt-7 mb-2">${pets.pet_name}</h2>
-                <p class="text-lg text-gray-600 font-bold mb-1">Breed : ${pets.breed}</p>
-                <p class="text-lg text-gray-600 font-bold mb-1">Birth : ${pets.date_of_birth}</p>
-                <p class="text-lg text-gray-600 font-bold mb-1">Gender : ${pets.gender}</p>
-                <p class="text-lg text-gray-600 font-bold mb-1">Price : ${pets.price}</p>
+
+                <p class=" flex items-center gap-3 text-lg text-gray-600 font-bold mb-1"><img class="w-5" src="https://img.icons8.com/?size=24&id=m82dxEXRKBiI&format=png"> Breed : ${pets.breed}</p>
+
+                <p class="flex items-center gap-3 text-lg text-gray-600 font-bold mb-1"><img class="w-5" src="https://img.icons8.com/?size=80&id=udduMUcrHmZa&format=png"> Birth : ${pets.date_of_birth}</p>
+
+                <p class="flex items-center gap-3 text-lg text-gray-600 font-bold mb-1"><img class="w-5" src="https://img.icons8.com/?size=32&id=15241&format=png"> Gender : ${pets.gender}</p>
+
+                <p class="flex items-center gap-3 text-lg text-gray-600 font-bold mb-1"><img class="w-5" src="https://img.icons8.com/?size=24&id=85801&format=png"> Price : ${pets.price}</p>
+
                 <div class="divider"></div>
                 <div class="card-actions">
-                    <button class="btn  shadow-current"> <img class="w-7 text-white" src="img/like.png" alt=""></button>
+                    <button class="btn  shadow-current"> <img class="w-7 text-white" src="img/like.png"></button>
                     <button class="btn shadow-current text-base text-[#3a7a82]">Adopt</button>
                     <button id="pet-details" class="btn shadow-current text-base text-[#3a7a82]">Details</button>
                 </div>
@@ -72,18 +67,16 @@
        });
     }
 
-
     // create displayCategories
     const displayCategories = (categories) =>{
         const categoryContainer = document.getElementById('categories');
         
-
         categories.forEach((item) => {
             
         // create buttons
               const buttonContainer = document.createElement('div');
               buttonContainer.innerHTML =`
-              <button onclick="loadCategoryImage(${item.id})" class="btn lg:text-xl text-xs">
+              <button onclick="loadCategoryImage(${item})" class="btn lg:text-xl text-xs">
                  <img src="${item.category_icon}" alt="Shoes" class="rounded-xl lg:w-10 w-7  object-cover " />  ${item.category}
               </button>
               `  
